@@ -1,4 +1,46 @@
 <div class="container">
-  <button class="btn btn-success">Click Me</button>
+  <!-- <button class="btn btn-success">Click Me</button> -->
+   <form action="" style="background: #428bca; padding-top: 20px; margin-top: 20px; padding-bottom: 2px;">
+    <div class="form-group">
+      <div class="input-group" style="padding-left: 10px; width: 100% !important;">
+        <input type="text" id="dilter" name="text" placeholder="Search">
+        <i id="filterIcon" class="fa fa-search"></i>
+      </div>
+    </div>
+   </form>
+   <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Remove</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (customer of customers; track customer.email) {
+      <tr> 
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.age }}</td>
+        <td>{{ customer.email }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-primary btn-sm">
+            <i class="fa fa-edit"></i>
+          </button>
+        </td>
+      </tr>
+      } @empty {
+        <tr>
+          <td colspan="5">No hay clientes registrados.</td>
+        </tr>
+      }
+    </tbody>
+   </table>
 </div>
 <router-outlet></router-outlet>

@@ -9,13 +9,17 @@ export interface CustomerState {
     error: string; // To store error message
 }
 
+// Initial state for the Customer feature
 export const initialState: CustomerState = {
-    data: [],
+    data: [
+        { id: 1, name: 'John Doe', age: 30, email: 'jdoe@gmail.com'}
+    ],
     loaded: false,
     loading: false,
     error: ''
 };
 
+// Reducer function to handle actions and update the state
 export function reducer(state = initialState,  action: { type: any; }){
     switch (action.type) {
         case fromCustomerActions.LOAD_CUSTOMERS: {
