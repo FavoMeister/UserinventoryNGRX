@@ -8,6 +8,18 @@
       </div>
     </div>
    </form>
+   @if (errorMessage()) {
+    <div class="alert alert-danger">
+      Error al cargar clientes: {{ errorMessage() }}
+    </div>
+  }
+
+  @if (isLoading()) {
+    <div class="text-center my-3">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p>Cargando clientes...</p>
+    </div>
+  }
    <table class="table table-striped">
     <thead>
       <tr>
@@ -36,11 +48,17 @@
         </td>
       </tr>
       } @empty {
-        <tr>
-          <td colspan="5">No hay clientes registrados.</td>
-        </tr>
+        @if (!isLoading()) {
+          <tr>
+            <td colspan="5">No hay clientes registrados.</td>
+          </tr>
+        }
       }
     </tbody>
    </table>
+   <br>
+   @if (customer30()) {
+      <p>Editando a: {{ customer30()?.name }}</p>
+    }
 </div>
 <router-outlet></router-outlet>

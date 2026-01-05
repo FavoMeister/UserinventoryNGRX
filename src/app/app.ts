@@ -1,4 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store'; // Import Store from NgRx
 import * as fromStore from './store'; // Import the AppState interface
@@ -14,10 +15,10 @@ import { CustomerService } from './services/customer-service';
 })
 export class App implements OnInit{
   protected title = 'crud-app';
-  customers = signal<Customer[]>([]);
-
+  //customers = signal<Customer[]>([]);
+  private store = inject(Store);
   // Example of injecting the store
-  constructor(private store: Store<fromStore.AppState>, private customerService: CustomerService) {
+  constructor(private customerService: CustomerService) {
     /* store.select(state => state.customers).subscribe(customersState => {
       console.log('Customers State:', customersState);
       this.customers = customersState.data;
@@ -27,17 +28,39 @@ export class App implements OnInit{
       console.log('Fetched Customers:', this.customers);
     }); */
   }
+
+  customers = toSignal(this.store.select(fromStore.selectAllCustomers), { initialValue: [] });
+
+  isLoading = toSignal(this.store.select(fromStore.selectCustomersLoading), { initialValue: false });
+
+  isLoaded = toSignal(this.store.select(fromStore.selectCustomersLoaded), { initialValue: false });
+
+  errorMessage = toSignal(this.store.select(fromStore.selectCustomersError), { initialValue: null });
+
+  customer30 = toSignal(this.store.select(fromStore.getCustomerById(1)));
+
   ngOnInit() {
     // 1. Disparamos la acción para cargar datos
     this.store.dispatch(fromCustomerActions.loadCustomers());
 
+    /* this.store.select(fromStore.getCustomerById(1)).subscribe(customer => {
+      console.log('Customer with ID 1:', customer);
+    }); */
+    /* this.store.select(fromStore.getCustomerById(1)).subscribe(data => {
+      console.log('Datos recibidos desde el Store para ID 1:', data);
+    }); */
+
+    // Debug: Ver el estado completo de customers
+    /* this.store.select(state => state.customers).subscribe(state => {
+      console.log('Estado completo de customers:', state);
+    }); */
     // 2. Nos suscribimos al store para actualizar la signal
     // (En el futuro usaremos Selectors para esto, pero así funciona perfecto por ahora)
-    this.store.select(state => state.customers.data).subscribe(data => {
+    /*this.store.select(state => state.customers.data).subscribe(data => {
         if (data) {
             this.customers.set(data);
         }
-    });
+    });*/
     /* this.customerService.getCustomers().subscribe((data) => {
       console.log('Fetched Customers:', data);
       // 3. Usamos .set() para actualizar el valor. 
