@@ -1,11 +1,15 @@
-import { Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
+import { Customer } from "../../models/customer.model";
 
-export const LOAD_CUSTOMERS = '[Customer] Load Customers';
+export const loadCustomers = createAction('[Customer] Load Customers');
 
-// Action class to use the constant
-export class LoadCustomer implements Action {
-  readonly type = LOAD_CUSTOMERS;
-}
+export const loadCustomersSuccess = createAction(
+  '[Customer] Load Customers Success',
+  props<{ payload: Customer[] }>()
+);
 
-// To have a reference to classes
-export type CustomerActions = LoadCustomer;
+export const loadCustomersFail = createAction(
+  '[Customer] Load Customers Fail',
+  props<{ payload: any }>()
+);
+

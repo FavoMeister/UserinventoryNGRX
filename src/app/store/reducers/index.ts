@@ -1,11 +1,13 @@
-import * as fromCustoemrReducer from './app.ruducer';
+import { ActionReducerMap } from '@ngrx/store';
+import * as fromCustomerReducer from './app.reducer';
 
 // Define the overall state interface
 export interface AppState {
-    customers: fromCustoemrReducer.CustomerState;
+    customers: fromCustomerReducer.CustomerState;
 }
 
-// Combine the reducers
-export const reducers = {
-    customers: fromCustoemrReducer.reducer
+//
+export const reducers: ActionReducerMap<AppState> = {
+    // Aquí usamos 'customerReducer' porque así lo nombramos en el paso anterior
+    customers: fromCustomerReducer.customerReducer 
 };
