@@ -11,9 +11,7 @@ export interface CustomerState {
 
 // Initial state for the Customer feature
 export const initialState: CustomerState = {
-    data: [
-        { id: 1, name: 'John Doe', age: 30, email: 'jdoe@gmail.com'}
-    ],
+    data: [],
     loaded: false,
     loading: false,
     error: ''

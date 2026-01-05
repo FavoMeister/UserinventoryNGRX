@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (customer of customers; track customer.email) {
+      @for (customer of customers(); track customer.id) {
       <tr> 
         <td>{{ customer.name }}</td>
         <td>{{ customer.age }}</td>

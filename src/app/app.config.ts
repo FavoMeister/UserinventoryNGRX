@@ -6,6 +6,7 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { reducers } from './store'; // Import the reducers
 import { provideStore } from '@ngrx/store';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +22,6 @@ export const appConfig: ApplicationConfig = {
       trace: false, // Si quieres ver el stack trace de cada acción (útil pero pesado)
       traceLimit: 75,
     }), // Optional: Redux DevTools integration
+    provideHttpClient(), // HttpClient provider
   ]
 };
