@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store'; // Import Store from NgRx
@@ -6,10 +6,14 @@ import * as fromStore from './store'; // Import the AppState interface
 import * as fromCustomerActions from './store/actions/customer.action';
 import { Customer } from './models/customer.model';
 import { CustomerService } from './services/customer-service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    FormsModule
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -17,6 +21,9 @@ export class App implements OnInit{
   protected title = 'crud-app';
   //customers = signal<Customer[]>([]);
   private store = inject(Store);
+  display = signal<'block' | 'none'>('none');
+  isEditModeEnabled = signal<boolean>(false);
+
   // Example of injecting the store
   constructor(private customerService: CustomerService) {
     /* store.select(state => state.customers).subscribe(customersState => {
@@ -67,5 +74,26 @@ export class App implements OnInit{
       // Esto obligará a la tabla a renderizarse.
       this.customers.set(data); 
     }); */
+  }
+
+  openModalDialog() {
+    this.isEditModeEnabled.set(false);
+    this.display.set('block');
+  }
+
+  openModal() {
+    this.display.set('block');
+  }
+
+  closeModal(form: any) {
+    this.display.set('none');
+    form.reset();
+  }
+  
+  // Cuando vas a editar
+  editCustomer(customer: Customer) {
+    this.isEditModeEnabled.set(true);
+    this.display.set('block');
+    // ... lógica para cargar datos en el form
   }
 }
