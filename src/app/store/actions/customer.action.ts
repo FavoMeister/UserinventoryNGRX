@@ -28,3 +28,21 @@ export const updateCustomerFail = createAction(
   '[Customer] Update Customer Fail',
   props<{ payload: any }>()
 );
+
+// Add Customer
+export const addCustomer = createAction(
+  '[Customer] Add Customer',
+  props<{ payload: Customer }>()
+);
+
+// Success Action for Add Customer
+export const addCustomerSuccess = createAction(
+  '[Customer] Add Customer Success',
+  props<{ payload: Customer }>()
+);
+
+// Fail Action for Add Customer
+export const addCustomerFail = createAction(
+  '[Customer] Add Customer Fail',
+  props<{ payload: any }>()
+);

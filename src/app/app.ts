@@ -112,4 +112,17 @@ export class App implements OnInit{
     console.error('Form is invalid');
   }
   }
+
+  addCustomer(form: any) {
+    if (form.valid) {
+      // Eliminamos el ID si está vacío para que la base de datos cree uno nuevo
+      const { id, ...newCustomerData } = form.value;
+      
+      this.store.dispatch(fromStore.addCustomer({ payload: newCustomerData }));
+      
+      this.closeModal(form);
+    } else {
+      console.error('Formulario no válido');
+    }
+  }
 }

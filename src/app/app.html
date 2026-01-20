@@ -30,7 +30,7 @@
         <div class="modal-footer">
           <button class="btn btn-secondary" data-dismiss="modal" (click)="closeModal(myForm)">Close</button>
           @if (!isEditModeEnabled()) {
-            <!-- <button type="button" class="btn btn-primary" (click)="addCustomer(myForm)">Add Client</button> -->
+            <button type="button" class="btn btn-primary" (click)="addCustomer(myForm)">Add Client</button>
           } @else {
             <button type="button" class="btn btn-success" (click)="updateCustomer(myForm)">Update</button>
           }

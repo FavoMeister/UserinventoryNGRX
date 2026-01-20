@@ -53,4 +53,13 @@ export const customerReducer = createReducer(
             String(customer.id) === String(payload.id) ? payload : customer
         )
     })),
+
+    // Maneja ADD_CUSTOMER_SUCCESS
+    on(fromCustomerActions.addCustomerSuccess, (state, { payload }) => ({
+        ...state,
+        loading: false,
+        loaded: true,
+        // Creamos un nuevo array con los datos actuales + el nuevo cliente
+        data: [...state.data, payload] 
+    })),
 );

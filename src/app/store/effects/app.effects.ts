@@ -45,4 +45,22 @@ export class CustomerEffects {
       )
     )
   );
+
+  //Add Customer
+  addCustomer$ = createEffect(() => 
+    // Escuchamos las acciones
+    this.actions$.pipe(
+      // Filtramos por la acción de agregar cliente
+      ofType(fromCustomersActions.addCustomer),
+      switchMap(action => 
+        // Llamamos al servicio para agregar el cliente
+        this.customerService.addCustomer(action.payload).pipe(
+          // Si la adición es exitosa, despachamos la acción de éxito
+          map(newCustomer => fromCustomersActions.addCustomerSuccess({ payload: newCustomer })),
+          // Importante: catchError debe devolver un observable, por eso usamos of()
+          catchError(error => of(fromCustomersActions.addCustomerFail({ payload: error })))
+        )
+      )
+    )
+  );
 }

@@ -24,7 +24,14 @@ export class CustomerService {
 
   // Update Customer
   updateCustomer(customer: Customer) {
+    // Usamos template literals para construir la URL con el ID del cliente
     const url = `${this.apiUrl}/${customer.id}`;
     return this.http.put<Customer>(url, JSON.stringify(customer), this.httpOpt);
+  }
+
+  // Add Customer
+  addCustomer(customer: Customer) {
+    // No enviamos ID, el servidor (json-server) lo suele generar solo
+    return this.http.post<Customer>(this.apiUrl, JSON.stringify(customer), this.httpOpt);
   }
 }
