@@ -8,8 +8,9 @@
           <h5 class="modal-title">
             {{ isEditModeEnabled() ? 'Edit' : 'Add' }} customer
           </h5>
-          <button (click)="closeModal(myForm)" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button (click)="closeModal(myForm)" type="button" class="fa fa-close" data-dismiss="modal" aria-label="Close">
+            <!-- <span aria-hidden="true">&times;</span> -->
+            <!-- <i class="fa fa-x"></i> -->
           </button>
         </div>
         <div class="modal-body">
@@ -23,7 +24,7 @@
             <div class="form-group">
               <input type="email" class="form-control" placeholder="Enter your email" name="email" [(ngModel)]="person.email">
             </div>
-            <input type="text" name="id" ngModel hidden>
+            <input type="text" name="id" [(ngModel)]="person.id" hidden>
           </form>
         </div>
         <div class="modal-footer">
@@ -31,7 +32,7 @@
           @if (!isEditModeEnabled()) {
             <!-- <button type="button" class="btn btn-primary" (click)="addCustomer(myForm)">Add Client</button> -->
           } @else {
-            <!-- <button type="button" class="btn btn-success" (click)="updateCustomer(myForm)">Update</button> -->
+            <button type="button" class="btn btn-success" (click)="updateCustomer(myForm)">Update</button>
           }
         </div>
       </div>

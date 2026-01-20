@@ -4,16 +4,16 @@
       "name": "Henry",
       "age": 22,
       "email": "henry@email.com",
-      "id": 1
+      "id": "1"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Carmen",
       "age": 30,
       "email": "carmen@email.com"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Miguel",
       "age": 28,
       "email": "miguel@email.com"
@@ -22,13 +22,13 @@
       "name": "Esteban",
       "age": 40,
       "email": "esteban@email.com",
-      "id": 1572300257635
+      "id": "1572300257635"
     },
     {
       "name": "Mario",
-      "age": 25,
+      "age": 23,
       "email": "mario@email.com",
-      "id": 1572371378938
+      "id": "1572371378938"
     }
   ]
 }

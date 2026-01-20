@@ -98,7 +98,18 @@ export class App implements OnInit{
     this.isEditModeEnabled.set(true);
     this.person = { ...customer }; // Clona el objeto para evitar mutaciones directas
     this.display.set('block');
-    
+
     // ... lógica para cargar datos en el form
+  }
+
+  updateCustomer(form: any) {
+    if (form.valid) {
+    // IMPORTANTE: Enviar el objeto con la propiedad 'payload'
+    this.store.dispatch(fromStore.updateCustomer({ payload: form.value }));
+    
+    this.closeModal(form);
+  } else {
+    console.error('Form is invalid');
+  }
   }
 }

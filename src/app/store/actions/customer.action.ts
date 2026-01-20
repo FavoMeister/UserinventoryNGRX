@@ -13,3 +13,18 @@ export const loadCustomersFail = createAction(
   props<{ payload: any }>()
 );
 
+// Update Cutomer
+export const updateCustomer = createAction(
+  '[Customer] Update Customer',
+  props<{ payload: Customer }>()
+);
+
+export const updateCustomerSuccess = createAction(
+  '[Customer] Update Customer Success',
+  props<{ payload: Customer }>()
+); 
+
+export const updateCustomerFail = createAction(
+  '[Customer] Update Customer Fail',
+  props<{ payload: any }>()
+);

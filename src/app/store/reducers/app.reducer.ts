@@ -42,5 +42,15 @@ export const customerReducer = createReducer(
         loading: false,
         loaded: false,
         error: payload
-    }))
+    })),
+
+    // Maneja UPDATE_CUSTOMER_SUCCESS
+    on(fromCustomerActions.updateCustomerSuccess, (state, { payload }) => ({
+        ...state, // spread operator para mantener el estado anterior
+        // Actualizamos el cliente en la lista
+        data: state.data.map(customer =>
+            // Usamos String() para que '1' === 1 sea true
+            String(customer.id) === String(payload.id) ? payload : customer
+        )
+    })),
 );

@@ -28,4 +28,21 @@ export class CustomerEffects {
       )
     )
   );
+
+  //Update Customer
+  //@Effect()
+  updateCustomer$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(fromCustomersActions.updateCustomer),
+      switchMap(action => 
+        // Llamamos al servicio para actualizar el cliente
+        this.customerService.updateCustomer(action.payload).pipe(
+          // Si la actualización es exitosa, despachamos la acción de éxito
+          map(updatedCustomer => fromCustomersActions.updateCustomerSuccess({ payload: updatedCustomer })), // Pasamos el objeto con payload,
+          // Importante: catchError debe devolver un observable, por eso usamos of()
+          catchError(error => of(fromCustomersActions.updateCustomerFail({ payload: error })))
+        )
+      )
+    )
+  );
 }
