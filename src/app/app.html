@@ -15,13 +15,13 @@
         <div class="modal-body">
           <form #myForm="ngForm">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Enter a name" name="name" ngModel>
+              <input type="text" class="form-control" placeholder="Enter a name" name="name" [(ngModel)]="person.name">
             </div>
             <div class="form-group">
-              <input type="number" class="form-control" placeholder="Enter your age" name="age" ngModel>
+              <input type="number" class="form-control" placeholder="Enter your age" name="age" [(ngModel)]="person.age">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="Enter your email" name="email" ngModel>
+              <input type="email" class="form-control" placeholder="Enter your email" name="email" [(ngModel)]="person.email">
             </div>
             <input type="text" name="id" ngModel hidden>
           </form>
@@ -82,7 +82,7 @@
           </button>
         </td>
         <td>
-          <button class="btn btn-primary btn-sm">
+          <button class="btn btn-primary btn-sm" (click)="editCustomer(customer)">
             <i class="fa fa-edit"></i>
           </button>
         </td>

@@ -23,6 +23,9 @@ export class App implements OnInit{
   private store = inject(Store);
   display = signal<'block' | 'none'>('none');
   isEditModeEnabled = signal<boolean>(false);
+  person: Customer = {
+    email: ''
+  };
 
   // Example of injecting the store
   constructor(private customerService: CustomerService) {
@@ -93,7 +96,9 @@ export class App implements OnInit{
   // Cuando vas a editar
   editCustomer(customer: Customer) {
     this.isEditModeEnabled.set(true);
+    this.person = { ...customer }; // Clona el objeto para evitar mutaciones directas
     this.display.set('block');
+    
     // ... lógica para cargar datos en el form
   }
 }
