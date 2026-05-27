@@ -46,3 +46,19 @@ export const addCustomerFail = createAction(
   '[Customer] Add Customer Fail',
   props<{ payload: any }>()
 );
+
+// Delete Customer
+export const deleteCustomer = createAction(
+  '[Customer] Delete Customer',
+  props<{ id: string | number }>()
+);
+
+export const deleteCustomerSuccess = createAction(
+  '[Customer] Delete Customer Success',
+  props<{ id: string | number }>()
+);
+
+export const deleteCustomerFail = createAction(
+  '[Customer] Delete Customer Fail',
+  props<{ payload: any }>()
+);

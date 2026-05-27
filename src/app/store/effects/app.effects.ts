@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 // import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as fromCustomersActions from '../actions/customer.action';
@@ -59,6 +59,19 @@ export class CustomerEffects {
           map(newCustomer => fromCustomersActions.addCustomerSuccess({ payload: newCustomer })),
           // Importante: catchError debe devolver un observable, por eso usamos of()
           catchError(error => of(fromCustomersActions.addCustomerFail({ payload: error })))
+        )
+      )
+    )
+  );
+
+  deleteCustomer$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(fromCustomersActions.deleteCustomer),
+      // Usamos mergeMap porque no importa el orden si borramos varios seguidos
+      mergeMap(action => 
+        this.customerService.deleteCustomer(action.id).pipe(
+          map(() => fromCustomersActions.deleteCustomerSuccess({ id: action.id })),
+          catchError(error => of(fromCustomersActions.deleteCustomerFail({ payload: error })))
         )
       )
     )

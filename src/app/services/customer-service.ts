@@ -34,4 +34,11 @@ export class CustomerService {
     // No enviamos ID, el servidor (json-server) lo suele generar solo
     return this.http.post<Customer>(this.apiUrl, JSON.stringify(customer), this.httpOpt);
   }
+
+  // Eliminar Cliente
+  deleteCustomer(id: string | number) {
+    // Construimos la URL con el ID del cliente a eliminar
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete(url, this.httpOpt);
+  }
 }

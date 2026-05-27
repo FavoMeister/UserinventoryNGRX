@@ -62,4 +62,12 @@ export const customerReducer = createReducer(
         // Creamos un nuevo array con los datos actuales + el nuevo cliente
         data: [...state.data, payload] 
     })),
+
+    // Maneja DELETE_CUSTOMER_SUCCESS
+    on(fromCustomerActions.deleteCustomerSuccess, (state, { id }) => ({
+        ...state,
+        // Filtramos la lista para quitar el ID borrado
+        // Usamos String() por si acaso hay mezcla de tipos string/number
+        data: state.data.filter(customer => String(customer.id) !== String(id))
+    })),
 );

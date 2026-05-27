@@ -125,4 +125,17 @@ export class App implements OnInit{
       console.error('Formulario no válido');
     }
   }
+
+  removeCustomer(id: string | number) {
+    if(id !== undefined){
+      if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
+        this.store.dispatch(fromStore.deleteCustomer({ id }));
+      }
+    }
+    
+  }
+  deleteCustomer(id: string | number) {
+    // Lógica para eliminar cliente (a implementar)
+    console.log('Eliminar cliente con ID:', id);
+  }
 }

@@ -78,7 +78,7 @@
         <td>{{ customer.age }}</td>
         <td>{{ customer.email }}</td>
         <td>
-          <button class="btn btn-danger btn-sm">
+          <button class="btn btn-danger btn-sm" (click)="removeCustomer(customer.id!)">
             <i class="fa fa-trash"></i>
           </button>
         </td>
