@@ -50,12 +50,12 @@ export const addCustomerFail = createAction(
 // Delete Customer
 export const deleteCustomer = createAction(
   '[Customer] Delete Customer',
-  props<{ id: string | number }>()
+  props<{ id: number }>()
 );
 
 export const deleteCustomerSuccess = createAction(
   '[Customer] Delete Customer Success',
-  props<{ id: string | number }>()
+  props<{ id: number }>()
 );
 
 export const deleteCustomerFail = createAction(

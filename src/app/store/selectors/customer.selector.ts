@@ -1,31 +1,47 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CustomerState } from '../reducers/app.reducer';
+import { customerAdapter, CustomerState } from '../reducers/app.reducer';
 
 // 1. Obtenemos la "rebanada" completa del estado de clientes
 export const selectCustomerState = createFeatureSelector<CustomerState>('customers');
 
 // 2. Selector específico para la lista de data
-export const selectAllCustomers = createSelector(
+/* export const selectAllCustomers = createSelector(
     selectCustomerState,
     (state: CustomerState) => state.data
 );
+ */
+const {
+    selectAll,
+    selectEntities
+} = customerAdapter.getSelectors();
 
-// 3. Selector para el estado de carga
+// 3. Selector específico para la lista de data
+export const selectAllCustomers = createSelector(
+    selectCustomerState,
+    selectAll
+);
+
+// 4. Selector para el estado de carga
 export const selectCustomersLoaded = createSelector(
     selectCustomerState,
     (state: CustomerState) => state.loaded
 );
 
-// 4. Selector para el estado de loading
+// 5. Selector para el estado de loading
 export const selectCustomersLoading = createSelector(
     selectCustomerState,
     (state: CustomerState) => state.loading
 );
 
-// 5. Selector para el error
+// 6. Selector para el error
 export const selectCustomersError = createSelector(
     selectCustomerState,
     (state: CustomerState) => state.error
+);
+
+export const selectCustomerEntities = createSelector(
+    selectCustomerState,
+    selectEntities
 );
 
 /* export const getCustomerById = (id: any) => createSelector(
@@ -38,10 +54,10 @@ export const selectCustomersError = createSelector(
         return customers.find(customer => customer.id == id); 
     }
 ); */
-export const getCustomerById = (id: string | number) => createSelector(
-    selectAllCustomers,
-    (customers) => {
-        // Convertimos ambos a String para asegurar la comparación
-        return customers.find(customer => String(customer.id) === String(id));
+export const getCustomerById = (id: number | string | undefined) => createSelector(
+    selectCustomerEntities,
+    (entities) => {
+        if (id === undefined) return undefined;
+        return entities[id];
     }
 );

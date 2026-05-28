@@ -7,12 +7,14 @@ import * as fromCustomerActions from './store/actions/customer.action';
 import { Customer } from './models/customer.model';
 import { CustomerService } from './services/customer-service';
 import { FormsModule } from '@angular/forms';
+import { SearchPipe } from './pipes/search-pipe';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    FormsModule
+    FormsModule,
+    SearchPipe
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
@@ -26,6 +28,8 @@ export class App implements OnInit{
   person: Customer = {
     email: ''
   };
+
+  searchText = signal<string>('');
 
   // Example of injecting the store
   constructor(private customerService: CustomerService) {
@@ -104,13 +108,20 @@ export class App implements OnInit{
 
   updateCustomer(form: any) {
     if (form.valid) {
-    // IMPORTANTE: Enviar el objeto con la propiedad 'payload'
-    this.store.dispatch(fromStore.updateCustomer({ payload: form.value }));
-    
-    this.closeModal(form);
-  } else {
-    console.error('Form is invalid');
-  }
+      // IMPORTANTE: Enviar el objeto con la propiedad 'payload'
+      /* this.store.dispatch(fromStore.updateCustomer({ payload: form.value }));
+      
+      this.closeModal(form); */
+      const updatedCustomer: Customer = { 
+        ...this.person, 
+        ...form.value 
+      };
+      
+      this.store.dispatch(fromStore.updateCustomer({ payload: updatedCustomer }));
+      this.closeModal(form);
+    } else {
+      console.error('Form is invalid');
+    }
   }
 
   addCustomer(form: any) {
@@ -126,7 +137,7 @@ export class App implements OnInit{
     }
   }
 
-  removeCustomer(id: string | number) {
+  removeCustomer(id: undefined | number) {
     if(id !== undefined){
       if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
         this.store.dispatch(fromStore.deleteCustomer({ id }));

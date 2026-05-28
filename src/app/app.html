@@ -44,7 +44,12 @@
    <form action="" style="background: #428bca; padding-top: 20px; margin-top: 20px; padding-bottom: 2px;">
     <div class="form-group">
       <div class="input-group" style="padding-left: 10px; width: 100% !important;">
-        <input type="text" id="dilter" name="text" placeholder="Search">
+        <input 
+          type="text" 
+          id="dilter" 
+          name="searchText" 
+          placeholder="Search customers..." 
+          [(ngModel)]="searchText">
         <i id="filterIcon" class="fa fa-search"></i>
       </div>
     </div>
@@ -72,7 +77,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (customer of customers(); track customer.id) {
+      @for (customer of (customers() | search: searchText()); track customer.id) {
       <tr> 
         <td>{{ customer.name }}</td>
         <td>{{ customer.age }}</td>

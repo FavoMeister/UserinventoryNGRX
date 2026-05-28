@@ -18,6 +18,7 @@
     "@angular/router": "^20.0.0",
     "@angular/ssr": "^20.0.1",
     "@ngrx/effects": "^20.1.0",
+    "@ngrx/entity": "^20.1.0",
     "@ngrx/store": "^20.1.0",
     "@ngrx/store-devtools": "^20.1.0",
     "bootstrap": "^5.3.8",
